@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Yogesh Kargutkar Photography Studio | Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
+  <!-- SEO & Branding Meta Tags -->
+  <meta name="description" content="Yogesh Kargutkar Photography Studio - Client Galleries, 3D Digital Flipbooks & Portfolio Showcase.">
+  <meta name="theme-color" content="#0c0e14">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #0c0e14;
+      font-family: 'Inter', -apple-system, sans-serif;
+    }
+
+    /* PRELOADER SCREEN */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, #1a1714 0%, #0c0e14 75%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      color: #f4f4f6;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .brand-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    .brand-subtitle {
+      font-size: 11px;
+      color: #c5a059; /* Luxury Gold */
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid rgba(197, 160, 89, 0.2);
+      border-top-color: #c5a059;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* FULLSCREEN RESPONSIVE IFRAME */
+    #appFrame {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh; /* Dynamic viewport height for mobile */
+      border: none;
+      display: block;
+      background-color: #0c0e14;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <div class="brand-title">Yogesh Kargutkar Photography Studio</div>
+    <div class="brand-subtitle">Loading Studio Experience...</div>
+    <div class="spinner"></div>
+  </div>
+
+  <!-- GOOGLE APPS SCRIPT EMBED -->
+  <iframe 
+    id="appFrame"
+    src=""
+    allow="fullscreen; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen="true"
+    loading="eager">
+  </iframe>
+
+  <script>
+    (function() {
+      // Your Google Apps Script Web App URL
+      var GAS_BASE_URL = "https://script.google.com/macros/s/AKfycbyNd5B_pX37IuK-qFsuJ2lCoqxrSDWB3mdY138pZVqv9Ghs1mdw6ERIi6aXkvx1Z_PC/exec";
+      
+      // Seamlessly forward query parameters (e.g. ?portfolio=default_portfolio or ?flipbook=...)
+      var currentSearch = window.location.search || "";
+      var targetUrl = GAS_BASE_URL + currentSearch;
+
+      var frame = document.getElementById("appFrame");
+      var preloader = document.getElementById("preloader");
+
+      // Set Iframe Destination
+      frame.src = targetUrl;
+
+      // Hide Loader once content is loaded
+      frame.onload = function() {
+        preloader.style.opacity = "0";
+        preloader.style.visibility = "hidden";
+      };
+
+      // Fallback timeout in case iframe onload is delayed
+      setTimeout(function() {
+        if (preloader.style.visibility !== "hidden") {
+          preloader.style.opacity = "0";
+          setTimeout(function() { preloader.style.visibility = "hidden"; }, 500);
+        }
+      }, 4000);
+    })();
+  </script>
+</body>
+</html>
